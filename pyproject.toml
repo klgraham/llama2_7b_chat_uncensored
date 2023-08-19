@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "llama2-7b-chat-uncensored"
+version = "0.1.0"
+description = ""
+authors = ["Ken Graham <klogram.github@proton.me>"]
+readme = "README.md"
+packages = [{include = "llama2_7b_chat_uncensored"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+transformers = "^4.31.0"
+langchain = "^0.0.268"
+accelerate = "^0.21.0"
+bitsandbytes = "^0.41.1"
+sentencepiece = "^0.1.99"
+scipy = "^1.11.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
