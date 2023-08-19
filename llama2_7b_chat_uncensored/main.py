@@ -34,10 +34,20 @@ def compute_runtime(func):
 
 class LlamaRunner:
     # Wraps an example from https://huggingface.co/georgesung/llama2_7b_chat_uncensored
-    def __init__(self, use_accelerator=False, quantize=False):
+    def __init__(self, use_accelerator=False):
+        """
+        Initialize the LlamaRunner class.
+    
+        Args:
+            use_accelerator (bool, optional): Whether to use an accelerator or not. Defaults to False.
+        """
+        
         model_id = "georgesung/open_llama_7b_qlora_uncensored"
         tokenizer = LlamaTokenizer.from_pretrained(model_id)
-        model = LlamaForCausalLM.from_pretrained(model_id)
+        if use_accelerator:
+            model = LlamaForCausalLM.from_pretrained(model_id, device_map="auto", load_in_8bit=True)
+        else:
+            model = LlamaForCausalLM.from_pretrained(model_id)
         
         self.pipe = pipeline(
             "text-generation",
